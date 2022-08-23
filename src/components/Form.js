@@ -55,9 +55,9 @@ class Form extends React.Component {
           Nome
           <input
             data-testid="name-input"
-            id="name"
+            id="cardName"
             type="text"
-            name="name"
+            name="cardName"
             value={ cardName }
             onChange={ onInputChange }
           />
@@ -73,7 +73,7 @@ class Form extends React.Component {
         <Input
           label="Velocidade"
           type="number"
-          name="speed"
+          name="cardAttr1"
           testId="attr1-input"
           value={ cardAttr1 }
           handleChange={ onInputChange }
@@ -81,7 +81,7 @@ class Form extends React.Component {
         <Input
           label="Peso (kg)"
           type="number"
-          name="weight"
+          name="cardAttr2"
           testId="attr2-input"
           value={ cardAttr2 }
           handleChange={ onInputChange }
@@ -89,19 +89,16 @@ class Form extends React.Component {
         <Input
           label="Longevidade (anos)"
           type="number"
-          name="lifespan"
+          name="cardAttr3"
           testId="attr3-input"
-          // value={lifespan}
-          // handleChange={this.handleChange}
           value={ cardAttr3 }
           handleChange={ onInputChange }
         />
         <Input
           label="Imagem"
           type="text"
-          name="imgUrl"
+          name="cardImage"
           testId="image-input"
-          // value={imgUrl}
           value={ cardImage }
           handleChange={ onInputChange }
         />
@@ -109,24 +106,25 @@ class Form extends React.Component {
           Raridade
           <select
             data-testid="rare-input"
-            name="rarity"
+            name="cardRare"
             onChange={ onInputChange }
             // value={rarity}
             value={ cardRare }
           >
-            <option name="rarity" value="normal">Normal</option>
-            <option name="rarity" value="raro">Raro</option>
-            <option name="rarity" value="muito raro">Muito raro</option>
+            <option name="cardRare" value="normal">Normal</option>
+            <option name="cardRare" value="raro">Raro</option>
+            <option name="cardRare" value="muito raro">Muito raro</option>
           </select>
         </label>
         <label htmlFor="trunfo-input">
           É Super Trunfo?
           <input
-            name="superT"
+            name="cardTrunfo"
             // value={ superT }
             // onChange={this.handleCheck}
             onChange={ onInputChange }
             type="checkbox"
+            id="trunfo-input"
             // checked={superT === true}
             checked={ cardTrunfo }
             data-testid="trunfo-input"
