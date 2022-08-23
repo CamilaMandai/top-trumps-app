@@ -1,40 +1,54 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Input from './Input';
 
 class Form extends React.Component {
-  state = {
-    name: '',
-    cardDescription: '',
-    speed: 0,
-    weight: 0,
-    lifespan: 0,
-    imgUrl: '',
-    rarity: 'normal',
-    superT: false,
-  };
+  // state = {
+  //   name: '',
+  //   carddescription: '',
+  //   speed: 0,
+  //   weight: 0,
+  //   lifespan: 0,
+  //   imgUrl: '',
+  //   rarity: 'normal',
+  //   superT: false,
+  // };
 
-  handleChange = ({ target }) => {
-    const { value, name } = target;
-    this.setState({ [name]: value });
-  };
+  // handleChange = ({ target }) => {
+  //   const { value, name } = target;
+  //   this.setState({ [name]: value });
+  // };
 
-  handleCheck = ({ target }) => {
-    const { name } = target;
-    this.setState(target.checked ? { [name]: true } : { [name]: false });
-  };
+  // handleCheck = ({ target }) => {
+  //   const { name } = target;
+  //   this.setState(target.checked ? { [name]: true } : { [name]: false });
+  // };
 
   // getValue = (chave) => this.state[chave];
 
   render() {
-    // const { label, type, name, testId, value, htmlFor, handleChange } = this.props;
-    const { name,
+    const { cardName,
       cardDescription,
-      speed,
-      weight,
-      lifespan,
-      imgUrl,
-      rarity,
-      superT } = this.state;
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+      hasTrunfo,
+      isSaveButtonDisabled,
+      onInputChange,
+      onSaveButtonClick } = this.props;
+
+    // const { name,
+    //   carddescription,
+    //   speed,
+    //   weight,
+    //   lifespan,
+    //   imgUrl,
+    //   rarity,
+    //   superT } = this.state;
+    console.log(hasTrunfo);
     return (
       <form>
         <label htmlFor="name">
@@ -44,8 +58,8 @@ class Form extends React.Component {
             id="name"
             type="text"
             name="name"
-            value={ name }
-            onChange={ this.handleChange }
+            value={ cardName }
+            onChange={ onInputChange }
           />
         </label>
         <Input
@@ -54,47 +68,51 @@ class Form extends React.Component {
           name="cardDescription"
           testId="description-input"
           value={ cardDescription }
-          handleChange={ this.handleChange }
+          handleChange={ onInputChange }
         />
         <Input
           label="Velocidade"
           type="number"
           name="speed"
           testId="attr1-input"
-          value={ speed }
-          handleChange={ this.handleChange }
+          value={ cardAttr1 }
+          handleChange={ onInputChange }
         />
         <Input
           label="Peso (kg)"
           type="number"
           name="weight"
           testId="attr2-input"
-          value={ weight }
-          handleChange={ this.handleChange }
+          value={ cardAttr2 }
+          handleChange={ onInputChange }
         />
         <Input
           label="Longevidade (anos)"
           type="number"
           name="lifespan"
           testId="attr3-input"
-          value={ lifespan }
-          handleChange={ this.handleChange }
+          // value={lifespan}
+          // handleChange={this.handleChange}
+          value={ cardAttr3 }
+          handleChange={ onInputChange }
         />
         <Input
           label="Imagem"
           type="text"
           name="imgUrl"
           testId="image-input"
-          value={ imgUrl }
-          handleChange={ this.handleChange }
+          // value={imgUrl}
+          value={ cardImage }
+          handleChange={ onInputChange }
         />
         <label htmlFor="rare-input">
           Raridade
           <select
             data-testid="rare-input"
             name="rarity"
-            onChange={ this.handleChange }
-            value={ rarity }
+            onChange={ onInputChange }
+            // value={rarity}
+            value={ cardRare }
           >
             <option name="rarity" value="normal">Normal</option>
             <option name="rarity" value="raro">Raro</option>
@@ -105,17 +123,41 @@ class Form extends React.Component {
           É Super Trunfo?
           <input
             name="superT"
-            value={ superT }
-            onChange={ this.handleCheck }
+            // value={ superT }
+            // onChange={this.handleCheck}
+            onChange={ onInputChange }
             type="checkbox"
-            checked={ superT === true }
+            // checked={superT === true}
+            checked={ cardTrunfo }
             data-testid="trunfo-input"
           />
         </label>
-        <button data-testid="save-button" type="submit">Salvar</button>
+        <button
+          data-testid="save-button"
+          disabled={ isSaveButtonDisabled }
+          type="submit"
+          onClick={ onSaveButtonClick }
+        >
+          Salvar
+        </button>
       </form>
     );
   }
 }
+
+Form.propTypes = {
+  cardName: PropTypes.string,
+  cardDescription: PropTypes.string,
+  cardAttr1: PropTypes.string,
+  cardAttr2: PropTypes.string,
+  cardAttr3: PropTypes.string,
+  cardImage: PropTypes.string,
+  cardRare: PropTypes.string,
+  cardTrunfo: PropTypes.bool,
+  hasTrunfo: PropTypes.bool,
+  isSaveButtonDisabled: PropTypes.bool,
+  onInputChange: PropTypes.func,
+  onSaveButtonClick: PropTypes.func,
+}.isRequired;
 
 export default Form;

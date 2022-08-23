@@ -25,7 +25,7 @@ Input.propTypes = {
   name: PropTypes.string,
   testId: PropTypes.string,
   value: PropTypes.string,
-  handleChange: PropTypes.function,
+  handleChange: PropTypes.func,
 }.isRequired;
 
 export default Input;
