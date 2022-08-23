@@ -13,12 +13,21 @@ class App extends React.Component {
     cardRare: '',
     cardTrunfo: false,
     hasTrunfo: false,
-    isSaveButtonDisabled: false,
+    isSaveButtonDisabled: true,
   };
 
   onInputChange = ({ target }) => {
     const { value, name } = target;
     this.setState({ [name]: value });
+    const { cardName,
+      cardDescription,
+      cardImage,
+      cardRare } = this.state;
+    if (!cardName || !cardDescription || !cardImage || !cardRare) {
+      this.setState({ isSaveButtonDisabled: false });
+    } else {
+      this.setState({ isSaveButtonDisabled: true });
+    }
   };
 
   onSaveButtonClick = () => {
