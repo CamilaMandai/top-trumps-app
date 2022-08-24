@@ -80,6 +80,7 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       cards: [...anterior.cards, novoCard],
+      filter: '',
     }));
   };
 
@@ -90,6 +91,11 @@ class App extends React.Component {
     if (cardExcluded.cardTrunfo) { this.setState({ hasTrunfo: false }); }
     const cardRemained = cards.filter((card) => card.cardName !== name);
     this.setState({ cards: cardRemained });
+  };
+
+  filterCardByName = ({ target }) => {
+    const { value } = target;
+    this.setState({ filter: value });
   };
 
   render() {
@@ -105,8 +111,9 @@ class App extends React.Component {
       hasTrunfo,
       isSaveButtonDisabled,
       cards,
+      filter,
     } = this.state;
-
+    const filteredCards = cards.filter((card) => card.cardName.includes(filter));
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -138,8 +145,17 @@ class App extends React.Component {
           onClick={ this.removeBtn }
         />
         <div>
+          <h4>Pesquisar</h4>
+          <input
+            data-testid="name-filter"
+            type="text"
+            onChange={ this.filterCardByName }
+            placeholder="Nome da carta"
+          />
+        </div>
+        <div>
           <h3>Todas as Cartas</h3>
-          {cards.map((card) => (
+          {filteredCards.map((card) => (
             <Card
               key={ card.cardName }
               cardName={ card.cardName }
