@@ -81,6 +81,7 @@ class App extends React.Component {
       cardTrunfo: false,
       cards: [...anterior.cards, novoCard],
       filter: '',
+      filterRarity: '',
     }));
   };
 
@@ -93,10 +94,16 @@ class App extends React.Component {
     this.setState({ cards: cardRemained });
   };
 
-  filterCardByName = ({ target }) => {
+  filterCard = ({ target }) => {
     const { value } = target;
-    this.setState({ filter: value });
+    const { name } = target;
+    // if (value === 'todas') { value = 'r'; }
+    this.setState({ [name]: value });
   };
+
+  // filterCard = ({target}) => {
+  //   const { value, name } = target;
+  // }
 
   render() {
     const {
@@ -112,8 +119,11 @@ class App extends React.Component {
       isSaveButtonDisabled,
       cards,
       filter,
+      filterRarity,
     } = this.state;
-    const filteredCards = cards.filter((card) => card.cardName.includes(filter));
+    const filterCardsByName = cards.filter((card) => card.cardName.includes(filter));
+    const filteredCards = filterCardsByName
+      .filter((c) => (filterRarity === 'todas' ? c : c.cardRare === filterRarity));
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -149,9 +159,21 @@ class App extends React.Component {
           <input
             data-testid="name-filter"
             type="text"
-            onChange={ this.filterCardByName }
+            name="filter"
+            onChange={ this.filterCard }
             placeholder="Nome da carta"
           />
+          <h4>Filtrar por raridade</h4>
+          <select
+            data-testid="rare-filter"
+            name="filterRarity"
+            onChange={ this.filterCard }
+          >
+            <option name="filterRarity" value="todas">Todos</option>
+            <option name="filterRarity" value="normal">Normal</option>
+            <option name="filterRarity" value="raro">Raro</option>
+            <option name="filterRarity" value="muito raro">Muito raro</option>
+          </select>
         </div>
         <div>
           <h3>Todas as Cartas</h3>
