@@ -70,7 +70,6 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
     };
-    console.log(novoCard);
     this.setState((anterior) => ({
       cardName: '',
       cardDescription: '',
@@ -79,8 +78,18 @@ class App extends React.Component {
       cardAttr3: 0,
       cardImage: '',
       cardRare: 'normal',
+      cardTrunfo: false,
       cards: [...anterior.cards, novoCard],
     }));
+  };
+
+  removeBtn = ({ target }) => {
+    const { name } = target;
+    const { cards } = this.state;
+    const cardExcluded = cards.find((card) => card.cardName === name);
+    if (cardExcluded.cardTrunfo) { this.setState({ hasTrunfo: false }); }
+    const cardRemained = cards.filter((card) => card.cardName !== name);
+    this.setState({ cards: cardRemained });
   };
 
   render() {
@@ -125,6 +134,8 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
           hasTrunfo={ hasTrunfo }
+          button={ false }
+          onClick={ this.removeBtn }
         />
         <div>
           <h3>Todas as Cartas</h3>
@@ -140,6 +151,8 @@ class App extends React.Component {
               cardRare={ card.cardRare }
               cardTrunfo={ card.cardTrunfo }
               hasTrunfo={ card.hasTrunfo }
+              button
+              del={ this.removeBtn }
             />
           ))}
         </div>

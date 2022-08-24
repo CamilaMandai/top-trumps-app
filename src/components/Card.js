@@ -10,7 +10,18 @@ class Card extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      button,
+      del,
     } = this.props;
+    const dBtn = (
+      <button
+        data-testid="delete-button"
+        type="button"
+        name={ cardName }
+        onClick={ del }
+      >
+        Excluir
+      </button>);
     return (
       <div>
         <p data-testid="name-card">{cardName}</p>
@@ -22,6 +33,7 @@ class Card extends React.Component {
         <p data-testid="rare-card">{cardRare}</p>
         {/* <p data-testid="trunfo-card">{cardTrunfo ? 'Super Trunfo' : ''}</p> */}
         {cardTrunfo ? <p data-testid="trunfo-card">Super Trunfo</p> : <p />}
+        {button ? dBtn : ''}
       </div>
     );
   }
