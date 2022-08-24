@@ -82,6 +82,8 @@ class App extends React.Component {
       cards: [...anterior.cards, novoCard],
       filter: '',
       filterRarity: 'todas',
+      filterSuper: false,
+      disableFilters: false,
     }));
   };
 
@@ -100,6 +102,28 @@ class App extends React.Component {
     this.setState({ [name]: value });
   };
 
+  filterSuperTrunfo = ({ target }) => {
+    const { checked } = target;
+    if (checked) {
+      this.setState(
+        { filterSuper: true,
+          disableFilters: true },
+      );
+    } else { this.setState({ filterSuper: false, disableFilters: false }); }
+  };
+
+  filterCards = (cardsByName) => {
+    const { filterSuper, filterRarity, cards } = this.state;
+    if (filterSuper) {
+      return cards.filter((card) => card.cardTrunfo === 'on');
+    }
+    return cardsByName
+      .filter((c) => (filterRarity === 'todas' ? c : c.cardRare === filterRarity));
+  };
+
+  // filterSuper ?  :
+  //   filterCardsByName.filter((c) => (filterRarity === 'todas' ? c : c.cardRare === filterRarity));
+
   render() {
     const {
       cardName,
@@ -114,11 +138,13 @@ class App extends React.Component {
       isSaveButtonDisabled,
       cards,
       filter,
-      filterRarity,
+      disableFilters,
     } = this.state;
     const filterCardsByName = cards.filter((card) => card.cardName.includes(filter));
-    const filteredCards = filterCardsByName
-      .filter((c) => (filterRarity === 'todas' ? c : c.cardRare === filterRarity));
+    // const filteredCards = filterSuper ? cards.filter((card) => card.cardTrunfo === true) :
+    // filterCardsByName.filter((c) => (filterRarity === 'todas' ? c : c.cardRare === filterRarity));
+    const filteredCards = this.filterCards(filterCardsByName);
+
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -157,25 +183,30 @@ class App extends React.Component {
             name="filter"
             onChange={ this.filterCard }
             placeholder="Nome da carta"
+            disabled={ disableFilters }
           />
           <h4>Filtrar por raridade</h4>
           <select
             data-testid="rare-filter"
             name="filterRarity"
             onChange={ this.filterCard }
+            disabled={ disableFilters }
           >
             <option name="filterRarity" value="todas">Todos</option>
             <option name="filterRarity" value="normal">Normal</option>
             <option name="filterRarity" value="raro">Raro</option>
             <option name="filterRarity" value="muito raro">Muito raro</option>
           </select>
-          {/* <label>Super Trunfo
+          <label htmlFor="trunfo-filter">
+            Super Trunfo
             <input
-             data-testid="trunfo-filter"
+              data-testid="trunfo-filter"
+              id="trunfo-filter"
               type="checkbox"
-               name="filterSuper"
-               onChange={this.fiterSuper}></input>
-          </label> */}
+              name="filterSuper"
+              onChange={ this.filterSuperTrunfo }
+            />
+          </label>
         </div>
         <div>
           <h3>Todas as Cartas</h3>
