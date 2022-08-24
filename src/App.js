@@ -81,7 +81,7 @@ class App extends React.Component {
       cardTrunfo: false,
       cards: [...anterior.cards, novoCard],
       filter: '',
-      filterRarity: '',
+      filterRarity: 'todas',
     }));
   };
 
@@ -95,15 +95,10 @@ class App extends React.Component {
   };
 
   filterCard = ({ target }) => {
-    const { value } = target;
-    const { name } = target;
+    const { value, name } = target;
     // if (value === 'todas') { value = 'r'; }
     this.setState({ [name]: value });
   };
-
-  // filterCard = ({target}) => {
-  //   const { value, name } = target;
-  // }
 
   render() {
     const {
@@ -174,6 +169,13 @@ class App extends React.Component {
             <option name="filterRarity" value="raro">Raro</option>
             <option name="filterRarity" value="muito raro">Muito raro</option>
           </select>
+          {/* <label>Super Trunfo
+            <input
+             data-testid="trunfo-filter"
+              type="checkbox"
+               name="filterSuper"
+               onChange={this.fiterSuper}></input>
+          </label> */}
         </div>
         <div>
           <h3>Todas as Cartas</h3>
