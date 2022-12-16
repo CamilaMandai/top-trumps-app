@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import './index.css';
 
 class App extends React.Component {
   state = {
@@ -95,6 +96,12 @@ class App extends React.Component {
     const cardRemained = cards.filter((card) => card.cardName !== name);
     this.setState({ cards: cardRemained });
   };
+
+  // removeBtn = (index) => {
+  //   const {cards} = this.state;
+  //   cards.splice(index, 1);
+  //   this.setState({cards});
+  // }
 
   filterCard = ({ target }) => {
     const { value, name } = target;
@@ -211,20 +218,23 @@ class App extends React.Component {
         <div>
           <h3>Todas as Cartas</h3>
           {filteredCards.map((card) => (
-            <Card
-              key={ card.cardName }
-              cardName={ card.cardName }
-              cardDescription={ card.cardDescription }
-              cardAttr1={ card.cardAttr1 }
-              cardAttr2={ card.cardAttr2 }
-              cardAttr3={ card.cardAttr3 }
-              cardImage={ card.cardImage }
-              cardRare={ card.cardRare }
-              cardTrunfo={ card.cardTrunfo }
-              hasTrunfo={ card.hasTrunfo }
-              button
-              del={ this.removeBtn }
-            />
+            <div key={ card.cardName }>
+              <Card
+                key={ card.cardName }
+                cardName={ card.cardName }
+                cardDescription={ card.cardDescription }
+                cardAttr1={ card.cardAttr1 }
+                cardAttr2={ card.cardAttr2 }
+                cardAttr3={ card.cardAttr3 }
+                cardImage={ card.cardImage }
+                cardRare={ card.cardRare }
+                cardTrunfo={ card.cardTrunfo }
+                hasTrunfo={ card.hasTrunfo }
+                button
+                del={ this.removeBtn }
+              />
+              {/* <button key={card.cardName} onClick={() => this.removeBtn(index)}>Excluir</button> */}
+            </div>
           ))}
         </div>
 
