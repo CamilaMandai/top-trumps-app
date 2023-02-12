@@ -1,13 +1,15 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+Jogo no estilo Super Trunfo, com baralho de tema a ser escolhido pelo usuário. 
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+Além de poder escolher o toma do baralho, o usuário pode:
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+1 - Adicionar e remover uma carta do baralho;
+
+2 - Visualizar todas as cartas que foram adicionadas ao baralho;
+
+3 - Jogar com o baralho criado.
+
+A aplicação foi desenvolvida a partir de componentes utilizando React.
+
+## Para rodar a aplicação ##
+
+Rode o comando **npm install** para instalar as dependências (você deve ter o node instalado), seguido de **npm start** para iniciar a aplicação.
